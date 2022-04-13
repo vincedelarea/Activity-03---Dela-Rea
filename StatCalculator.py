@@ -2,16 +2,6 @@ from sympy import *
 
 class compStats:
 
-    baseHP=baseSDef=baseSAtk=baseSpeed=baseDef=baseAtk = 0
-
-    def setStats(bHP, bSDef, bSAtk, bSpeed, bDef, bAtk):
-        baseHP=bHP
-        baseSDef=bSDef
-        baseSAtk=bSAtk
-        baseSpeed=bSpeed
-        baseDef=bDef
-        baseAtk=bAtk
-
     def HpStat(base, iv, ev, lvl):
         statval = {
             "Base": base,
@@ -27,7 +17,6 @@ class compStats:
         hpval = round(N(hp.subs([(base, statval["Base"]),(iv, statval["IV"]),(ev,statval["EV"]),(lvl,statval["Level"])])))
         return hpval
 
-    
     def OtherStat(base, iv, ev, lvl, stat, nature):
         natureMod = 0
         if(stat=="Sp.Def"):
