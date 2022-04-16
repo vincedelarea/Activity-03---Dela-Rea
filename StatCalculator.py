@@ -26,28 +26,28 @@ class compStats:
                 natureMod = 0.9
             else:
                 natureMod = 1
-        if(stat=="Sp.Atk"):
+        elif(stat=="Sp.Atk"):
             if(nature>=15 and nature<=19):
                 natureMod = 1.1
             elif(nature==3 or nature==8 or nature==13 or nature==23):
                 natureMod = 0.9
             else:
                 natureMod = 1
-        if(stat=="Speed"):
+        elif(stat=="Speed"):
             if(nature>=10 and nature<=14):
                 natureMod = 1.1
             elif(nature==2 or nature==7 or nature==17 or nature==22):
                 natureMod = 0.9
             else:
                 natureMod = 1
-        if(stat=="Defense"):
+        elif(stat=="Defense"):
             if(nature>=5 and nature<=9):
                 natureMod = 1.1
             elif(nature==1 or nature==11 or nature==16 or nature==21):
                 natureMod = 0.9
             else:
                 natureMod = 1
-        if(stat=="Attack"):
+        elif(stat=="Attack"):
             if(nature>=1 and nature<=4):
                 natureMod = 1.1
             elif(nature==5 or nature==10 or nature==15 or nature==20):

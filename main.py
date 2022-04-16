@@ -1,3 +1,4 @@
+from shutil import which
 from sympy import *
 import os
 import StatCalculator as StatCalc
@@ -15,8 +16,8 @@ evAtk=0
 #count, statnum
 
 chstat = """
-1. HP       2.Sp.Def        3.Sp.Atk        
-4.Speed     5. Defense      6.Attack
+1. HP        2. Sp.Def       3. Sp.Atk        
+4. Speed     5. Defense      6. Attack
 Enter number:"""
 
 printNature = """
@@ -28,21 +29,70 @@ printNature = """
 Enter number:"""
 #Boolean TRUE if single stat otherwise false,
 def evGet(val, stat):
+    EVIncrease = 0
+    # 0:HP, 1:Sp.Def, 2:Sp.Atk, 3:Speed, 4:Def, 5:Atk
+    StatIncrease = [0, 0, 0, 0, 0, 0]
+    nature = 0
+    if(num!=1):
+        nature = int(input(printNature))
+    level = int(input("Level:"))
+    IV = int(input("Value should be (0-31)\nPokemon IV:"))
     if(val==True):
+        EVIncrease = int(input("Increase in stat:"))
         if(stat==1):
-            print("hp")
+            baseHP = int(input("Base HP:"))
+            evHP = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+            print(EvCalc.compEV.EVCalc(EVIncrease, nature, level, baseHP, IV, evHP, "HP"))
         elif(stat==2):
-            print("SDef")
+            baseSDef = int(input("Base Sp.Def:"))
+            evSDef = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+            print(EvCalc.compEV.EVCalc(EVIncrease, nature, level, baseSDef, IV, evSDef, "Sp.Def"))
         elif(stat==3):
-            print("hp")
+            baseSAtk = int(input("Base Sp.Atk:"))
+            evSAtk = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+            print(EvCalc.compEV.EVCalc(EVIncrease, nature, level, baseSAtk, IV, evSAtk, "Sp.Atk"))
         elif(stat==4):
-            print("SDef")
+            baseSpd = int(input("Base Speed:"))
+            evSpd = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+            print(EvCalc.compEV.EVCalc(EVIncrease, nature, level, baseSpd, IV, evSpd, "Speed"))
         elif(stat==5):
-            print("SDef")
+            baseDef = int(input("Base Defense:"))
+            evDef = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+            print(EvCalc.compEV.EVCalc(EVIncrease, nature, level, baseDef, IV, evDef, "Defense"))
         elif(stat==6):
-            print("SDef")
+            baseAtk = int(input("Base Attack:"))
+            evAtk = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+            print(EvCalc.compEV.EVCalc(EVIncrease, nature, level, baseAtk, IV, evAtk, "Attack"))
+        input("")
     elif(val==False):
-        print("")
+        baseHP = int(input("Base HP:"))
+        evHP = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+        StatIncrease[0] = int(input("Increase in stat:"))
+        baseSDef = int(input("Base Sp.Def:"))
+        evSDef = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+        StatIncrease[1] = int(input("Increase in stat:"))
+        baseSAtk = int(input("Base Sp.Atk:"))
+        evSAtk = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+        StatIncrease[2] = int(input("Increase in stat:"))
+        baseSpd = int(input("Base Speed:"))
+        evSpd = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+        StatIncrease[3] = int(input("Increase in stat:"))
+        baseDef = int(input("Base Defense:"))
+        evDef = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+        StatIncrease[4] = int(input("Increase in stat:"))
+        baseAtk = int(input("Base Attack:"))
+        evAtk = int(input("Value should be (0-255) Max EV value of all stat should not exceed 510\nCurrent EV:"))
+        StatIncrease[5] = int(input("Increase in stat:"))
+        #Int rstat, Float Modif, Int Level, Int Base, Int IV, Int EV, STAT
+        print("EVs need to increase stats:")
+        print("HP:", EvCalc.compEV.EVCalc(StatIncrease[0], nature, level, baseHP, IV, evHP, ""))
+        print("Sp.Def:", EvCalc.compEV.EVCalc(StatIncrease[1], nature, level, baseSpd, IV, evSDef, ""))
+        print("Sp.Atk:", EvCalc.compEV.EVCalc(StatIncrease[2], nature, level, baseSAtk, IV, evSAtk, ""))
+        print("Speed:", EvCalc.compEV.EVCalc(StatIncrease[3], nature, level, baseSpd, IV, evSpd, ""))
+        print("Defense:", EvCalc.compEV.EVCalc(StatIncrease[4], nature, level, baseDef, IV, evDef, ""))
+        print("Attack:", EvCalc.compEV.EVCalc(StatIncrease[5], nature, level, baseAtk, IV, evAtk, ""))
+        input("")
+
         
 
 def getStats():
@@ -113,7 +163,7 @@ while(True):
                 num=int(input(chstat))
                 evGet(True, num)
             elif(num==2):
-                EvCalc.compEV.EVCalc(False)
+                evGet(False, 0)
             continue
         else:
             print("Exiting Program")
